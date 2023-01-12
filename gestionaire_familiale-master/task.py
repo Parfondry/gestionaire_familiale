@@ -28,3 +28,11 @@ class Task:
         if self.done:
             state=" a été effectuée !"
         print("la tache numéro "+ str(self.id) +" : "+self.name+ state)
+
+    def add_task(self):
+
+        newtask = input("Veuillez entrer votre nouvelle tâche (entre guillemets):")
+        if not type(newtask) is str:
+            raise TypeError("seulement str sont accepté")
+    
+        return newtask
