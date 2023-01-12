@@ -24,3 +24,19 @@ class TaskHistory:
     @property
     def user_did(self):
         return self.__user_did
+
+    @id.setter
+    def id(self,new_id=True):
+        self.__id=new_id
+    
+    @description_task.setter
+    def description_task(self,new_description_task=True):
+        self.__description_task=new_description_task
+    
+    @date_done.setter
+    def date_done(self,new_date_done=True):
+        self.__date_done=new_date_done
+
+    @user_did.setter
+    def user_did(self,new_user_did=True):
+        self.__user_did=new_user_did
