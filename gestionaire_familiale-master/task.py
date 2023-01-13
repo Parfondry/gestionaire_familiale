@@ -68,11 +68,11 @@ class Task:
     def __repr__(self):
         return('id : ' + str(self.id) + ' desc : ' + str(self.desc))
 
-    def str(self):
-        state=" est disponible !"
-        if self.done:
-            state=" a été effectuée !"
-        print("la tache numéro "+ str(self.id) +" : "+self.desc+ state)
+    #def str(self):
+     #   state=" est disponible !"
+      #  if self.done:
+       #     state=" a été effectuée !"
+        #print("la tache numéro "+ str(self.id) +" : "+self.desc+ state)
 
     
     
