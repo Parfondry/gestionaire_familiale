@@ -39,23 +39,23 @@ class Task:
         return self.__frequency
     
     @done.setter
-    def done(self,new_done=True):
+    def done(self,new_done):
         self.__done=new_done
     
     @last_time.setter
-    def last_time(self,new_last_time=True):
+    def last_time(self,new_last_time):
         self.__last_time=new_last_time
     
     @limite_time.setter
-    def limite_time(self,new_limite_time=True):
+    def limite_time(self,new_limite_time):
         self.__limite_time=new_limite_time
     
     @frequency.setter
-    def frequency(self,new_frequency=True):
+    def frequency(self,new_frequency):
         self.__frequency=new_frequency
     
     @desc.setter
-    def desc(self,new_desc=True):
+    def desc(self,new_desc):
         self.__desc=new_desc
 
 
@@ -68,11 +68,6 @@ class Task:
     def __repr__(self):
         return('id : ' + str(self.id) + ' desc : ' + str(self.desc))
 
-    #def str(self):
-     #   state=" est disponible !"
-      #  if self.done:
-       #     state=" a été effectuée !"
-        #print("la tache numéro "+ str(self.id) +" : "+self.desc+ state)
 
     
     
