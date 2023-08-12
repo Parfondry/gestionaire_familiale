@@ -3,7 +3,9 @@ from user import User
 
 class Parent(User):
     def __init__(self, name, type, password):
+
         super().__init__(name, type)
+
         self.passwor = password
 
     def add_user(self):

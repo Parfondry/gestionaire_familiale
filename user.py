@@ -1,3 +1,6 @@
+from task import Task
+
+
 class User:
 
     def __init__(self, name, type):
@@ -13,21 +16,20 @@ class User:
     def type(self):
         return self.__type
 
-    @name.setter
-    def name(self, new_name):
-        self.__name = new_name
+    def show_tasks(self, task_liste):
+        # return a list of tasks objects
+        for task in task_liste:
+            print(task.name + " : " + task.points)
 
-    def connection(self, type):
-        pass
+    def show_reward_liste(self, reward_liste):
+        for reward in reward_liste:
+            print(reward.name + " : " + reward.cost)
 
-    def show_tasks(self):
-        pass
-
-    def show_reward_liste(self):
-        pass
-
-    def show_scoreboard(self):
-        pass
+    def show_scoreboard(self, children_list):
+        ordered_list = sorted(
+            children_list, key=lambda child: child.points, reverse=True)
+        for child in ordered_list:
+            print(child.name + " : " + str(child.points) + " points")
 
     # # fonction qui permet de transformer un objet TASK en un dictionaire.
 
