@@ -14,10 +14,13 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.user.name, "Alice")
 
     def test_earn_points(self):
+        self.assertEqual(self.user.points, 0)
         self.user.earn_points(10)
         self.assertEqual(self.user.points, 10)
         self.user.earn_points(20)
         self.assertEqual(self.user.points, 30)
+        self.user.earn_points(-10)
+        self.assertEqual(self.user.points, 20)
 
     def test_get_tasks(self):
         tasks = self.user.get_tasks([self.task1, self.task2])
