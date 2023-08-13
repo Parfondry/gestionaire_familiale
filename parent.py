@@ -13,18 +13,18 @@ class Parent(User):
 
         self.passwor = password
 
-    def add_child(self, child_name):
-        if child_name not in DataManager.list_children:
+    def add_child(self, child_name, data):
+        if child_name not in data.list_children:
             new_child = Children(child_name, 0)
-            DataManager.add_children(new_child)
+            data.add_children(new_child)
         else:
             print("Il exixste déja un enfant avec le nom " + child_name)
 
-    def remove_children(self, child):
-        if child not in DataManager.list_children:
+    def remove_children(self, child, data):
+        if child not in data.list_children:
             print("Il n'existe pas d'enfant avec le nom " + child.name)
         else:
-            DataManager.list_children.remove(child)
+            data.list_children.remove(child)
 
 # methodes for handeling tasks
 
@@ -39,32 +39,43 @@ class Parent(User):
         if task in data.list_task:
             data.list_task.remove(task)
 
-    def accept_task(self):
-        pass
+    def accept_task(self, task, child, data):
+        DataManager.add_task_to_be_validated.remove(task)
+        DataManager.add_task_history.append(task)
+        child.points += task.points
 
-    def reject_task(self):
-        pass
+    def reject_task(self, task):
+        DataManager.add_task_to_be_validated.remove(task)
 
     def show_requested_tasks(self):
-        pass
+        task_liste = []
+        for task in DataManager.list_task_to_validated:
+            task_liste.append(task)
+        return task_liste
+
 
 # methodes for handeling rewards
 
     def add_reward(self, reward_name, cost):
-        if reward_name not in DataManager.list_reward:
+        if reward_name not in DataManager.list_reward.name:
             new_reward = Reward(reward_name, cost)
             DataManager.add_reward(new_reward)
         else:
             print("Il exixste déja une récompense : " + reward_name)
 
-    def remove_reward(self):
-        pass
+    def remove_reward(self, reward):
+        if reward in DataManager.list_reward:
+            DataManager.list_reward.remove(reward)
 
-    def accept_reward(self):
-        pass
+    def accept_reward(self, reward, child):
+        DataManager.list_reward_to_be_granted.remove(reward)
+        child.points = child.points - reward.cost
 
-    def reject_reward(self):
-        pass
+    def reject_reward(self, reward):
+        DataManager.list_reward_to_be_granted.remove(reward)
 
     def show_requested_reward(self):
-        pass
+        reward_liste = []
+        for reward in DataManager.list_reward_to_be_granted:
+            reward_liste.append(reward)
+        return reward_liste

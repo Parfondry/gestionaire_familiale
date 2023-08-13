@@ -25,10 +25,10 @@ class Children(User):
         self.__point = new_point
 
     def request_task(self, task):
-        DataManager.add_task_to_be_validated(task)
+        DataManager.add_task_to_be_validated(task, self.name)
 
     def request_reward(self, reward, child_name):
-        DataManager.add_reward_to_be_granted(reward, child_name)
+        DataManager.add_reward_to_be_granted(reward, self.name)
 
     # def transform_to_dico(self):
      #   dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
