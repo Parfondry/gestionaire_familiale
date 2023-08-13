@@ -88,11 +88,10 @@ def read_task_history_file():
     liste_task_history=[]
     data_task_history=read_file_data('fichier/task_history.json')
     for task_history in data_task_history:
-        print("lecture",task_history)
         description_task=task_history["description_task"]
         date_done=task_history["date_done"]
-        user_did =task_history["user_did"]
-        liste_task_history.append(TaskHistory(description_task,date_done,user_did))
+        children =task_history["children"]
+        liste_task_history.append(TaskHistory(description_task,date_done,children))
     return liste_task_history
 
 
@@ -131,9 +130,8 @@ def read_task_to_be_validated():
     liste_task_to_be_validated=[]
     data_task_to_be_validated=read_file_data('fichier/task_to_be_validated.json')
     for task_to_be_validated in data_task_to_be_validated:
-        print("lecture",task_to_be_validated)
         description_task=task_to_be_validated["description_task"]
         date_done=task_to_be_validated["date_done"]
-        user_did =task_to_be_validated["user_did"]
-        liste_task_to_be_validated.append(TaskHistory(description_task,date_done,user_did))
+        children =task_to_be_validated["children"]
+        liste_task_to_be_validated.append(TaskHistory(description_task,date_done,children))
     return liste_task_to_be_validated

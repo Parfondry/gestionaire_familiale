@@ -1,10 +1,12 @@
+from datetime import *
+import os
 from task import *
 from reward import *
 from task_history import *
 from user import *
-from datetime import *
-from lecture import *
-import os
+from children import Children
+from datamanager import DataManager
+
 
 # fonction pour clear la consoel
 
@@ -26,6 +28,8 @@ def cls():
 
 if __name__ == "__main__":
     cls()
+    data=DataManager()
+    data.load_data()
     print("Bienvenue dans le gestionaire de taches familiales, qui etes vous ? ")
     print()
 

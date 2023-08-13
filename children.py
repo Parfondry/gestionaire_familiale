@@ -1,5 +1,4 @@
 from user import User
-from datamanager import DataManager
 
 class Children(User):
     def __init__(self, name, type, point, reward_list):
@@ -28,12 +27,11 @@ class Children(User):
 
 
     def request_task(self, task, name):
-        
+        pass
 
-    def request_reward(self, reward, child_name):
-        DataManager.add_reward_to_be_granted(reward, child_name)
-
+    def request_reward(self, name, date):
+        pass
     
-    #def transform_to_dico(self):
-     #   dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
-      #  return dico 
+    def transform_to_dico(self):
+        dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
+        return dico
