@@ -20,8 +20,10 @@ def conn_enfant(data):
     print("Bonjour !")
     print("")
 
-    for i in data.list_children:
-        print("(" + i + ") " + data.list_children[i].nom)
+    count = 0
+    for child in data.list_children:
+        count += 1
+        print("(" + str(count) + ") " + child.name)
 
     print("")
     print("(0) retour")
@@ -30,7 +32,7 @@ def conn_enfant(data):
     if userinput == 0:
         connection(data)
 
-    main_enfant()
+    main_enfant(data)
 
 
 def pass_parent(data):
