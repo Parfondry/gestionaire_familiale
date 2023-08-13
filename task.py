@@ -41,7 +41,7 @@ class Task:
 
     @point.setter
     def point(self,new_point):
-        self.__frequency=new_point
+        self.__point=new_point
 
     @desc.setter
     def desc(self,new_desc):
