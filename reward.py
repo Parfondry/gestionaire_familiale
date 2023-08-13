@@ -1,9 +1,9 @@
 
 class Reward:
 
-    def __init__(self, cost, name):
+    def __init__(self, name, cost):
 
-        self.__cost_point = cost
+        self.__cost= cost
         self.__name = name
 
     @property
@@ -22,7 +22,7 @@ class Reward:
     def name(self, name):
         self.__name = name
 
-    # #fonction qui permet de transformer un objet TASK en un dictionaire.
-    # def transform_to_dico(self):
-    #     dico={'name':self.name,'cost_point':self.cost_point}
-    #     return dico
+    #fonction qui permet de transformer un objet TASK en un dictionaire.
+    def transform_to_dico(self):
+        dico={'name':self.name,'cost':self.cost}
+        return dico

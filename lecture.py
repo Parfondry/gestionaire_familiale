@@ -1,5 +1,5 @@
 import json
-from task import *
+from task import Task
 from reward import *
 from task_history import *
 from user import *
