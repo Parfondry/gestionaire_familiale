@@ -1,6 +1,7 @@
 from user import User
 from datamanager import DataManager
 from task import Task
+from reward import Reward
 
 
 class Children(User):
@@ -31,7 +32,14 @@ class Children(User):
     def request_task(self, task, data):
         task_formated=task.task_to_task_history(self)
         data.add_task_to_be_validated(task_formated)
-        
+
+     
+    #fonction qui prend une reward et qui prends la data en entre
+    #elle permet d'ajouter a la liste des rewards a quémander
+          
+    def request_reward(self,reward,data):
+        data.add_reward_to_be_granted(reward,self.name)
+
 
     def transform_to_dico(self):
         dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
