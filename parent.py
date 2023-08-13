@@ -20,23 +20,24 @@ class Parent(User):
         else:
             print("Il exixste déja un enfant avec le nom " + child_name)
 
-    def remove_child(self, child_name):
-        if child_name not in DataManager.list_children:
-            print("Il n'existe pas d'enfant avec le nom " + child_name)
+    def remove_children(self, child):
+        if child not in DataManager.list_children:
+            print("Il n'existe pas d'enfant avec le nom " + child.name)
         else:
-            pass
+            DataManager.list_children.remove(child)
 
 # methodes for handeling tasks
 
-    def add_task(self, task_name, points, last_time_done, time_limit):
-        if task_name not in DataManager.list_task:
+    def add_task(self, task_name, points, last_time_done, time_limit, data):
+        if task_name not in data.list_task:
             new_task = Task(task_name, points, last_time_done, time_limit)
-            DataManager.add_task(new_task)
+            data.add_task(new_task)
         else:
             print("Il exixste déja une tache : " + task_name)
 
-    def remove_task(self):
-        pass
+    def remove_task(self, task, data):
+        if task in data.list_task:
+            data.list_task.remove(task)
 
     def accept_task(self):
         pass
@@ -54,7 +55,7 @@ class Parent(User):
             new_reward = Reward(reward_name, cost)
             DataManager.add_reward(new_reward)
         else:
-            print("Il exixste déja une récompense : " + task_name)
+            print("Il exixste déja une récompense : " + reward_name)
 
     def remove_reward(self):
         pass

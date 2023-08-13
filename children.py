@@ -1,4 +1,5 @@
 from user import User
+from datamanager import DataManager
 
 
 class Children(User):
@@ -23,18 +24,6 @@ class Children(User):
     def point(self, new_point):
         self.__point = new_point
 
-<<<<<<< HEAD
-
-    def request_task(self, task, name):
-        pass
-
-    def request_reward(self, name, date):
-        pass
-    
-    def transform_to_dico(self):
-        dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
-        return dico
-=======
     def request_task(self, task):
         DataManager.add_task_to_be_validated(task)
 
@@ -44,4 +33,3 @@ class Children(User):
     # def transform_to_dico(self):
      #   dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
       #  return dico
->>>>>>> b2bc5b2 (blabla)
