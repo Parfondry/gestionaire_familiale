@@ -1,12 +1,10 @@
 from user import User
-from datamanager import DataManager
-from task import Task
-from reward import Reward
+
 
 
 class Children(User):
-    def __init__(self, name, type, point, reward_list):
-        super().__init__(name, type)
+    def __init__(self, name, point=0, reward_list=[]):
+        super().__init__(name )
         self.__point = point
         self.__reward_list = reward_list
 

@@ -3,18 +3,14 @@ from task import Task
 
 class User:
 
-    def __init__(self, name, type):
+    def __init__(self, name):
 
         self.__name = name
-        self.__type = type
 
     @property
     def name(self):
         return self.__name
 
-    @property
-    def type(self):
-        return self.__type
 
     def get_tasks(self, task_liste):
         # return a list of tasks objects

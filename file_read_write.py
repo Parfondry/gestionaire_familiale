@@ -4,7 +4,6 @@ from task import Task
 from reward import Reward
 from task_history import TaskHistory
 from children import Children
-from user import User
 
 # open and read a json file
 # input the name of the file as filename
@@ -105,7 +104,7 @@ def read_children_file():
         name=children["name"]
         point =children["point"]
         reward_list =children["reward_list"]
-        liste_children.append(Children(name,"?",point,reward_list))
+        liste_children.append(Children(name,point,reward_list))
     return liste_children
 
 

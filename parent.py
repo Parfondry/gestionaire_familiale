@@ -1,5 +1,4 @@
 from user import User
-from datamanager import DataManager
 from children import Children
 from task import Task
 from reward import Reward
@@ -15,7 +14,7 @@ class Parent(User):
 
     def add_child(self, child_name, data):
         if child_name not in data.list_children:
-            new_child = Children(child_name, 0)
+            new_child = Children(child_name)
             data.add_children(new_child)
         else:
             print("Il exixste déja un enfant avec le nom " + child_name)
@@ -44,38 +43,27 @@ class Parent(User):
         data.add_task_history(task)
         child.point += task.point
 
-    def reject_task(self, task):
-        DataManager.add_task_to_be_validated.remove(task)
-
-    def show_requested_tasks(self):
-        task_liste = []
-        for task in DataManager.list_task_to_validated:
-            task_liste.append(task)
-        return task_liste
-
+    def reject_task(self, task,data):
+        data.list_task_to_be_validated.remove(task)
+    
 
 # methodes for handeling rewards
 
-    def add_reward(self, reward_name, cost):
-        if reward_name not in DataManager.list_reward.name:
-            new_reward = Reward(reward_name, cost)
-            DataManager.add_reward(new_reward)
+    def add_reward(self, reward, cost, data):
+        if reward not in data.list_reward:
+            new_reward = Reward(reward.name, cost)
+            data.add_reward(new_reward)
         else:
-            print("Il exixste déja une récompense : " + reward_name)
+            print("Il exixste déja une récompense : " + reward.name)
 
-    def remove_reward(self, reward):
-        if reward in DataManager.list_reward:
-            DataManager.list_reward.remove(reward)
+    def remove_reward(self, reward, data):
+        if reward in data.list_reward:
+            data.list_reward.remove(reward)
 
-    def accept_reward(self, reward, child):
-        DataManager.list_reward_to_be_granted.remove(reward)
+    def accept_reward(self, reward, child,data):
+        data.list_reward_to_be_granted.remove(reward)
         child.points = child.points - reward.cost
+        ### ajouter la reward a la liste des reward du garçon
 
-    def reject_reward(self, reward):
-        DataManager.list_reward_to_be_granted.remove(reward)
-
-    def show_requested_reward(self):
-        reward_liste = []
-        for reward in DataManager.list_reward_to_be_granted:
-            reward_liste.append(reward)
-        return reward_liste
+    def reject_reward(self, reward, data):
+        data.list_reward_to_be_granted.remove(reward)
