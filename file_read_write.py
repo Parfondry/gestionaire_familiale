@@ -60,11 +60,11 @@ def read_task_file():
     liste_task=[]
     data_task=read_file_data('fichier/task.json')
     for task in data_task:
-        desc=task["desc"]
+        description=task["description"]
         last_time=task["last_time"]
         limite_time=task["limite_time"]
         point=task["point"]
-        liste_task.append(Task(desc,last_time,limite_time,point))
+        liste_task.append(Task(description,last_time,limite_time,point))
     return liste_task
 
 

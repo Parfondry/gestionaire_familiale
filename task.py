@@ -5,16 +5,16 @@ class Task:
     current_id=0
 
     #l'id s'incrémente à chaque nouvel instance créer de telle manière que chaque instance a un id unique
-    def __init__(self, desc,last_time,limite_time,point):
+    def __init__(self, description,last_time,limite_time,point):
         date_format = "%Y-%m-%d"
-        self.__desc =desc
+        self.__description =description
         self.__point = point
         self.__last_time = datetime.strptime(last_time, date_format).date()
         self.__limite_time = datetime.strptime(limite_time, date_format).date()
 
     @property
-    def desc(self):
-        return self.__desc
+    def description(self):
+        return self.__description
 
     @property
     def point(self):
@@ -43,9 +43,9 @@ class Task:
     def point(self,new_point):
         self.__point=new_point
 
-    @desc.setter
-    def desc(self,new_desc):
-        self.__desc=new_desc
+    @description.setter
+    def description(self,new_description):
+        self.__description=new_description
 
 
     ### input self, et un children
@@ -55,14 +55,14 @@ class Task:
         date_format = "%Y-%m-%d"
         time_now = datetime.now()
         time_now = time_now.strftime(date_format)
-        return TaskHistory(self.desc,time_now,children.name)
+        return TaskHistory(self.description,time_now,children.name)
                
 
 
     #fonction qui permet de transformer un objet TASK en un dictionaire.
     def transform_to_dico(self):
-        dico={'desc':self.desc,'last_time':self.last_time.strftime("%Y-%m-%d"),'limite_time':self.limite_time.strftime("%Y-%m-%d"),'point':self.point}
+        dico={'description':self.description,'last_time':self.last_time.strftime("%Y-%m-%d"),'limite_time':self.limite_time.strftime("%Y-%m-%d"),'point':self.point}
         return dico
 
     def __repr__(self):
-        return(' desc : ' + str(self.desc))
+        return(' description : ' + str(self.description))

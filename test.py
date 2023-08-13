@@ -1,8 +1,8 @@
 from datamanager import DataManager
 from datetime import datetime
-
+from parent import Parent
  ### test de launch
-
+papa=Parent("oaoa","pl")
 launch=DataManager(['a'],2,3,4,5,6)
 print(launch.list_task)
 launch.load_data()
@@ -24,4 +24,13 @@ print(datetime.now())
 task_history_created=task_to_transform.task_to_task_history(children)
 print(task_history_created)
 print(task_history_created.description_task)
+print("----")
+print("test de remove reward")
+for reward in launch.list_reward:
+    print(reward.name) 
+reward_to_remove=launch.list_reward[0]
+papa.remove_reward(reward_to_remove,launch)
+print("__")
+for reward in launch.list_reward:
+    print(reward.name) 
 
