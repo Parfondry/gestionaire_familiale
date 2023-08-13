@@ -6,32 +6,14 @@ from task_history import *
 from user import *
 from children import Children
 from datamanager import DataManager
-
-
-# fonction pour clear la consoel
-
-
-def cls():
-    os.system("cls" if os.name == "nt" else "clear")
-
-
-# def add_task(task):
-#     liste_task.append(task)
-# def add_reward(reward):
-#     liste_reward.append(reward)
-# def add_task_history(task_history):
-#     liste_task_history.append(task_history)
-# def add_user(user):
-#     liste_user.append(user)
-# # Main
+from interface import *
 
 
 if __name__ == "__main__":
     cls()
-    data=DataManager()
+    data = DataManager()
     data.load_data()
-    print("Bienvenue dans le gestionaire de taches familiales, qui etes vous ? ")
-    print()
+    connection(data)
 
 #     #charger les données
 #     liste_task=read_task_file()
