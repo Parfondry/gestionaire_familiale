@@ -1,4 +1,5 @@
-from datetime import *
+from datetime import datetime
+from task_history import TaskHistory
 
 class Task:
     current_id=0
@@ -46,6 +47,16 @@ class Task:
     def desc(self,new_desc):
         self.__desc=new_desc
 
+
+    ### input self, et un children
+    ### output une task history
+
+    def task_done(self,children):
+        date_format = "%Y-%m-%d"
+        time_now = datetime.now()
+        time_now = time_now.strftime(date_format)
+        return TaskHistory(self.desc,time_now,children.name)
+               
 
 
     #fonction qui permet de transformer un objet TASK en un dictionaire.
