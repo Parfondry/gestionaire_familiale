@@ -29,3 +29,6 @@ class Reward:
     def transform_to_dico(self):
         dico={'name':self.name,'cost':self.cost}
         return dico
+
+    def __repr__(self):
+       return str(self.name) + ' coûte ' + str(self.cost) + ' points' 

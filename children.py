@@ -43,3 +43,5 @@ class Children(User):
         dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
         return dico
 
+    def __repr__(self):
+       return str(self.name) + ' possède ' + str(self.point) + ' points'

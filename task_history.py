@@ -45,3 +45,6 @@ class TaskHistory:
     def transform_to_dico(self):
         dico={'id':self.id,'description_task':self.description_task,'date_done':self.date_done.strftime("%Y-%m-%d"),'children':self.children}     
         return dico
+    
+    def __repr__(self):
+       return str(self.description_task) + ' a été éffectué le ' + str(self.date_done) + ' par ' + str(self.children)
