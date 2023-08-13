@@ -25,20 +25,15 @@ class Children(User):
     def point(self, new_point):
         self.__point = new_point
 
-    def request_task(self, task):
-        DataManager.add_task_to_be_validated(task)
-
-    def request_reward(self, reward, child_name):
-        DataManager.add_reward_to_be_granted(reward, child_name)
-
 
     #fonction qui prend une tache et qui prends la data en entre
     #elle permet d'ajouter a la liste des taches a verifier la tache effectué
-    def task_accomplished(self, task, data):
-        task_formated=task.task_done(self)
+    def request_task(self, task, data):
+        task_formated=task.task_to_task_history(self)
         data.add_task_to_be_validated(task_formated)
         
 
     def transform_to_dico(self):
         dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
         return dico
+

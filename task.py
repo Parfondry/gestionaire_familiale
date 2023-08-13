@@ -51,7 +51,7 @@ class Task:
     ### input self, et un children
     ### output une task history
 
-    def task_done(self,children):
+    def task_to_task_history(self,children):
         date_format = "%Y-%m-%d"
         time_now = datetime.now()
         time_now = time_now.strftime(date_format)
