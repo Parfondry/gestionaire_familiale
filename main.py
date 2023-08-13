@@ -26,7 +26,8 @@ def cls():
 
 if __name__ == "__main__":
     cls()
-    print("coucou")
+    print("Bienvenue dans le gestionaire de taches familiales, qui etes vous ? ")
+    print()
 
 #     #charger les données
 #     liste_task=read_task_file()
