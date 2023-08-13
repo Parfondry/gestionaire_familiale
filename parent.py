@@ -40,9 +40,9 @@ class Parent(User):
             data.list_task.remove(task)
 
     def accept_task(self, task, child, data):
-        DataManager.add_task_to_be_validated.remove(task)
-        DataManager.add_task_history.append(task)
-        child.points += task.points
+        data.list_task_to_be_validated.remove(task)
+        data.add_task_history(task)
+        child.point += task.point
 
     def reject_task(self, task):
         DataManager.add_task_to_be_validated.remove(task)
