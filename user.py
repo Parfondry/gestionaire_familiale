@@ -31,9 +31,4 @@ class User:
         for child in ordered_list:
             print(child.name + " : " + str(child.points) + " points")
 
-    # # fonction qui permet de transformer un objet TASK en un dictionaire.
-
-    # def transform_to_dico(self):
-    #     dico = {'name': self.name, 'status': self.status,
-    #             'point': self.point, 'reward_liste': self.reward_list}
-    #     return dico
+ 
