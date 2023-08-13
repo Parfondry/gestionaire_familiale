@@ -28,12 +28,12 @@ def conn_enfant(data):
     userinput = int(input("Qui est tu ?"))
 
     if userinput == 0:
-        connection()
+        connection(data)
 
     main_enfant()
 
 
-def pass_parent():
+def pass_parent(data):
     print("pass_parent")
 
 
@@ -58,4 +58,4 @@ def connection(data):
         case _:
             print("réponse non valide")
             time.sleep(2)
-            connection()
+            connection(data)
