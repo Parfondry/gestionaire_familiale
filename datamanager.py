@@ -87,51 +87,62 @@ class DataManager():
     # delete
 
     def del_task(self, index):
+        index=index-1
         if 0 <= index < len(self.list_task):
             del self.list_task[index]
-
+    
     def del_reward(self, index):
+        index=index-1
         if 0 <= index < len(self.list_reward):
             del self.list_reward[index]
 
     def del_task_history(self, index):
+        index=index-1
         if 0 <= index < len(self.list_task_history):
             del self.list_task_history[index]
 
     def del_task_to_be_validated(self, index):
+        index=index-1
         if 0 <= index < len(self.list_task_to_validated):
             del self.list_task_to_validated[index]
 
     def del_children(self, index):
+        index=index-1
         if 0 <= index < len(self.list_children):
             del self.list_children[index]
 
     def del_reward_to_be_granted(self, index):
+        index=index-1
         if 0 <= index < len(self.list_reward_to_be_granted):
             del self.list_reward_to_be_granted[index]
 
     # update
 
     def update_task(self, index, new_task):
+        index=index-1
         if 0 <= index < len(self.list_task):
             self.list_task[index] = new_task
 
     def update_reward(self, index, new_reward):
+        index=index-1
         if 0 <= index < len(self.list_reward):
             self.list_reward[index] = new_reward
 
     # inutile normalement
     def update_task_history(self, index, new_task_history):
+        index=index-1
         if 0 <= index < len(self.list_task_history):
             self.list_task_history[index] = new_task_history
 
     def update_children(self, index, new_children):
+        index=index-1
         if 0 <= index < len(self.list_children):
             self.list_children[index] = new_children
 
     # Inutile noramlement
 
     def update_reward_to_be_granted(self, index, new_reward_data):
+        index=index-1
         if 0 <= index < len(self.list_reward_to_be_granted):
             self.list_reward_to_be_granted[index] = new_reward_data
 
@@ -146,6 +157,12 @@ class DataManager():
         self.list_task_to_validated = read_task_to_be_validated()
 
     def write_data(self):
+        write_list_data(self.list_task,'fichier/task.json')
+        write_list_data(self.list_children,'fichier/children.json')
+        write_list_data(self.list_reward,'fichier/reward.json')
+        write_list_data(self.list_task_to_validated,'fichier/task_to_be_validated.json')
+        write_list_data(self.list_task_history,'fichier/task_history.json')
+        write_list_task_to_be_validated(self.list_reward_to_be_granted,'fichier/reward_to_be_granted.json')
         write_list_data(self.list_task, 'fichier/task.json')
         write_list_data(self.list_children, 'fichier/children.json')
         write_list_data(self.list_reward, 'fichier/reward.json')
