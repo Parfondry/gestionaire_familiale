@@ -1,21 +1,65 @@
 import os
 import time
 
-
 # function to clear console
 
 def cls():
     os.system("cls" if os.name == "nt" else "clear")
 
+# function to handle error in input 
 
-# main menu enfant
 
-def main_enfant():
+def error_int_input(string,function_callback):
+    try:
+        userinput = int(input(string)) 
+        return userinput
+    except ValueError:
+        cls()
+        print("Erreur : l'entrée doit être un nombre entier\n")
+        function_callback()
+
+# function end 
+def close_app(data):
     cls()
-    print("main_enfant")
+    print("Au revoir !")
+    time.sleep(3)
+    data.write_data()
+
+# connection screen
+
+def connection(data):
+
+    connexion_passed=False
+    
+    while(not connexion_passed):
+        print("Bienvenue dans le gestionaire de taches familiales.")
+        print("")
+        print("(1) Un enfant ")
+        print("(2) un parent ")
+        print("")
+        print("(0) quitter ")
+    
+    
+        userinput=error_int_input("Qui êtes vous ?\n",lambda : connection(data))
+
+        match userinput:
+            case 1:
+                connexion_passed=True
+                return(connexion_enfant(data))
+            case 2:
+                connexion_passed=True
+                pass_parent(data)
+            case 0:
+                connexion_passed=True
+                close_app(data)
+            case _:
+                cls()
+                print("réponse non valide. \n")
+            
 
 
-def conn_enfant(data):
+
+def connexion_enfant(data):
     cls()
     print("Bonjour !")
     print("")
@@ -27,37 +71,18 @@ def conn_enfant(data):
 
     print("")
     print("(0) retour")
-    userinput = int(input("Qui est tu ?"))
+    userinput = error_int_input("Qui est-tu ?",lambda :connexion_enfant(data))
+    return(data.list_children[userinput-1])
 
-    if userinput == 0:
-        connection(data)
 
-    main_enfant(data)
 
 
 def pass_parent(data):
     print("pass_parent")
 
+ 
+# main menu enfant
 
-# connection screen
-
-def connection(data):
+def main_enfant(data):
     cls()
-    print("Bienvenue dans le gestionaire de taches familiales.")
-    print("")
-    print("(1) Un enfant ")
-    print("(2) un parrent ")
-    print("")
-    print("(0) quitter ")
-
-    userinput = int(input("Qui etes vous ?"))
-
-    match userinput:
-        case 1:
-            conn_enfant(data)
-        case 2:
-            pass_parent(data)
-        case _:
-            print("réponse non valide")
-            time.sleep(2)
-            connection(data)
+    print("main_enfant")

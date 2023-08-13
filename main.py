@@ -13,8 +13,8 @@ if __name__ == "__main__":
     cls()
     data = DataManager()
     data.load_data()
-    connection(data)
-
+    user=connection(data)
+    print(user.name)
 #     #charger les données
 #     liste_task=read_task_file()
 #     liste_reward=read_reward_file()
