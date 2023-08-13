@@ -1,5 +1,3 @@
-from task import Task
-
 
 class User:
 

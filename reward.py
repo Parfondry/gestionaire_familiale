@@ -22,6 +22,9 @@ class Reward:
     def name(self, name):
         self.__name = name
 
+    
+
+
     #fonction qui permet de transformer un objet TASK en un dictionaire.
     def transform_to_dico(self):
         dico={'name':self.name,'cost':self.cost}

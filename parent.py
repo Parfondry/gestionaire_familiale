@@ -63,7 +63,7 @@ class Parent(User):
     def accept_reward(self, reward, child,data):
         data.list_reward_to_be_granted.remove(reward)
         child.points = child.points - reward.cost
-        ### ajouter la reward a la liste des reward du garçon
+        child.reward_list.add(reward)
 
     def reject_reward(self, reward, data):
         data.list_reward_to_be_granted.remove(reward)
