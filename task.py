@@ -65,4 +65,4 @@ class Task:
         return dico
 
     def __repr__(self):
-        return(' description : ' + str(self.description))
+        return(str(self.description) + " a faire avant le " + str(self.limite_time) + ". Rapporte " + str(self.point) +" points.")

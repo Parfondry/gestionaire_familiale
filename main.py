@@ -13,20 +13,10 @@ if __name__ == "__main__":
     cls()
     data = DataManager()
     data.load_data()
+try :
     user=connection(data)
+    cls()
+    menu(user,data)
     print(user.name)
-#     #charger les données
-#     liste_task=read_task_file()
-#     liste_reward=read_reward_file()
-#     liste_task_history=read_task_history_file()
-#     liste_user=read_user_file()
-
-#     #lecture de tout les fichier et stockages dans des listes
-
-
-# ### fermeture du programme écriture de tout les données dans les fichiers
-
-#     write_liste_data(liste_task,'Fichier/test.json')
-#     write_liste_data(liste_reward,'Fichier/test.json')
-#     write_liste_data(liste_task_history,'Fichier/test.json')
-#     write_liste_data(liste_user,'Fichier/test.json')
+except Exception as e:
+    print("")

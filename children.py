@@ -42,4 +42,6 @@ class Children(User):
     def transform_to_dico(self):
         dico={'name':self.name,'point':self.point,'reward_list':self.reward_list}
         return dico
-
+    
+    def __repr__(self):
+        return(str(self.name) + " a " +  str(self.point) +" points.")

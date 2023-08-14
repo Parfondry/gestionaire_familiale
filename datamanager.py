@@ -146,7 +146,44 @@ class DataManager():
         if 0 <= index < len(self.list_reward_to_be_granted):
             self.list_reward_to_be_granted[index] = new_reward_data
 
-    ######
+    ###### Commande de show
+    def show_list_task(self):
+        count=0
+        for task in self.list_task:
+            count+=1
+            print(str(count) + ")" +str(task))
+    
+    def show_list_reward(self):
+        count = 0
+        for reward in self.list_reward:
+            count += 1
+            print(str(count) + ") " +str(reward))
+
+    def show_list_reward_to_be_granted(self):
+        count = 0
+        for reward_data in self.list_reward_to_be_granted:
+            count += 1
+            reward, children_name = reward_data
+            print(str(count) + ") " +str(reward.name) + ' pour ' + str(children_name))
+
+    def show_list_task_history(self):
+        count = 0
+        for task_history in self.list_task_history:
+            count += 1
+            print(str(count) + ") " +str(task_history))
+
+    def show_list_task_to_validated(self):
+        count = 0
+        for task_history in self.list_task_to_validated:
+            count += 1
+            print(str(count) + ") " +str(task_history))
+
+    def show_list_children(self):
+        count = 0
+        for child in self.list_children:
+            count += 1
+            print(str(count) + ") " +str(child))
+    #####
 
     def load_data(self):
         self.list_task = read_task_file()
