@@ -1,6 +1,7 @@
 import os
 import time
 from parent import Parent
+from task import Task
 
 # function to clear console
 
@@ -103,7 +104,7 @@ def menu(user,data):
     scoreboard="3) le Scoreboard"
     task_history="4) L'historique des Tâches"
     users="5) Liste des Enfants"
-    task_to_validated="6) les Tâches à valider"
+    task_to_be_validated="6) les Tâches à valider"
     reward_to_grand="7) les Récompenses à donner"
     quite="0) Déconnexion"
 
@@ -116,112 +117,291 @@ def menu(user,data):
         if parent:
             print(task_history)
             print(users)
-            print(task_to_validated)
+            print(task_to_be_validated)
             print(reward_to_grand)
         print(quite)
-        menu_passed=True
 
-        userinput=error_int_input("Où veux-tu aller ?",lambda : menu(user,data))
+        userinput=input("Où veux-tu aller ?")
+        if userinput.isdigit():
+            userinput=int(userinput)
+            match userinput:
+                case 1:
+                    cls()
+                    if isinstance(user,Parent):
+                        task_menu_parent(user, data)
+                    else:
+                        task_menu_enfant(user,data)
+                case 2:
+                    
+                    cls()
+                    if isinstance(user,Parent):
+                        reward_menu_parent(user, data)
+                    else:
+                        reward_menu_enfant(user,data)
+                case 3:
+                    
+                    cls()
+                    scoreboard_menu(user,data)
+                    #
+                case 4 if parent:
+                   
+                    cls()
+                    task_history_menu(user,data)
 
-        match userinput:
-            case 1:
-                menu_passed = True
-                cls()
-                task_menu(user, data)
-            case 2:
-                menu_passed = True
-                cls()
-                reward_menu(user, data)
-            case 3:
-                menu_passed = True
-                cls()
-                scoreboard_menu(user,data)
-                #
-            case 4 if parent:
-                menu_passed = True
-                cls()
-                task_history_menu(user,data)
+                case 5 if parent:
+                    
+                    cls()
+                    #children_menu(user, data)
 
-            case 5 if parent:
-                menu_passed = True
-                cls()
-                children_menu(user, data)
+                case 6 if parent:
+                    
+                    cls()
+                    task_to_be_validated_menu(user, data)
 
-            case 6 if parent:
-                menu_passed = True
-                cls()
-                task_to_validated_menu(user, data)
+                case 7 if parent:
+                   
+                    cls()
+                    reward_to_be_granted_menu(user, data)
 
-            case 7 if parent:
-                menu_passed = True
-                cls()
-                reward_to_be_granted_menu(user, data)
+                case 0:
+                    menu_passed = True
+                    cls()
+                    close_app(data)
+                case _:
+                    cls()
+                    print("réponse non valide. \n") 
+        else:
+            cls()
+            print("réponse non valide. \n")
 
-            case 0:
-                menu_passed = True
+#Fait
+def task_menu_parent(user,data):
+    flag=True
+    while flag:
+        print("La Liste des Tâches\n")
+        data.show_list_task()
+        print("\nLes commandes : \n")
+        print("Pour modifier une tâche veuillez insérer son numéro. ")
+        print("Pour ajouter une tâche insérez : -1")
+        print("Pour Retourner au menu principal insérez 0\n")
+        userinput=input("Insérez valeur : ")
+        if userinput.isdigit():
+            userinput= int(userinput)
+            if userinput==0:
                 cls()
-                close_app(data)
-            case _:
+                flag=False
+            elif 0 < userinput <= len(data.list_task):
                 cls()
-                print("réponse non valide. \n")
+                task=data.list_task[userinput-1]
+                print("Vous modifier la Tâche :",task.description)
+                print("Voulez vous la supprimer ?")
+                supprimer=input("Si oui appuyer sur 0, si non appuyer sur n'importe quel autre touche : ")
+                if supprimer == "0":
+                    data.del_task(userinput-1)
+                    cls()
+                    print("La tâche a bien été supprimée")
+                    input("Veuillez appuyer sur une touche pour continuer.")
+                else:
+                    point=""
+                    limite_time=""
+                    description=input("Veuillez insérer la description de la tâche : ")
+                    flag_limite_time = True
+                    while flag_limite_time:
+                        limite_time = input("Veuillez insérer la date limite de votre tâche (format : AAAA-MM-JJ) : ")
+                        date_components = limite_time.split('-')
+                        
+                        if len(date_components) == 3:
+                            year, month, day = date_components
+                            
+                            if year.isdigit() and month.isdigit() and day.isdigit():
+                                if len(year) == 4 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31:
+                                    flag_limite_time = False
+                                else:
+                                    print("Format de date incorrect. Veuillez utiliser le format AAAA-MM-JJ avec des valeurs valides.")
+                            else:
+                                print("Format de date incorrect. Veuillez utiliser des chiffres pour les composants de la date.")
+                        else:
+                            print("Format de date incorrect. Veuillez utiliser le format AAAA-MM-JJ.")
+                    
+                    flag_point = True
+                    while flag_point:
+                        point = input("Veuillez insérer le nombre de points de votre Tâche : ")
+                        if point.isdigit():
+                            point = int(point)
+                            flag_point = False
+                        else:
+                            print("Veuillez entrer un nombre entier valide.")
+                    cls()
+                    print(description,"a bien été ajoutée à la liste des tâches")
+                    data.update_task(userinput,Task(description,"2100-1-1",limite_time,point))
+                    input("appuyer sur n'importe quel touche pour continuer")
+                    cls()                
 
-def task_menu(user,data):
-    data.show_list_task()
-    if isinstance(user, Parent):
-        pass
-    else:
-        pass
+        elif userinput=="-1":
+                cls()
+                point=""
+                limite_time=""
+                description=input("Veuillez insérer la description de la tâche : ")
+                flag_limite_time = True
+                while flag_limite_time:
+                    limite_time = input("Veuillez insérer la date limite de votre tâche (format : AAAA-MM-JJ) : ")
+                    date_components = limite_time.split('-')
+                    
+                    if len(date_components) == 3:
+                        year, month, day = date_components
+                        
+                        if year.isdigit() and month.isdigit() and day.isdigit():
+                            if len(year) == 4 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31:
+                                flag_limite_time = False
+                            else:
+                                print("Format de date incorrect. Veuillez utiliser le format AAAA-MM-JJ avec des valeurs valides.")
+                        else:
+                            print("Format de date incorrect. Veuillez utiliser des chiffres pour les composants de la date.")
+                    else:
+                        print("Format de date incorrect. Veuillez utiliser le format AAAA-MM-JJ.")
+                
+                flag_point = True
+                while flag_point:
+                    point = input("Veuillez insérer le nombre de points de votre Tâche : ")
+                    if point.isdigit():
+                        point = int(point)
+                        flag_point = False
+                    else:
+                        print("Veuillez entrer un nombre entier valide.")
+                print(description,"a bien été ajoutée à la liste des tâches")
+                data.add_task(Task(description,"2100-1-1",limite_time,point))
+                input("appuyer sur n'importe quel touche pour continuer")
+                cls()
+                
 
-def reward_menu(user,data):
+        else:
+            cls()
+            print("Choix non valide. Veuillez sélectionner un numéro valide ou 0 pour revenir au menu principal.\n")
+    
+#Fait
+def task_menu_enfant(user,data):
+    flag=True
+    while flag:
+        print("La Liste des Tâches\n")
+        data.show_list_task()
+        print("0) Pour revenir au menu")
+        userinput = input("\n Met le numéro de la tâche que tu souhaites effecuter : ")
+        if userinput.isdigit():
+            userinput = int(userinput)
+            if userinput == 0:
+                flag=False
+                cls()
+            elif 0 < userinput <= len(data.list_task):
+                cls()
+                selected_task = data.list_task[userinput - 1]
+                user.request_task(selected_task,data)
+                input("La tâche est en attente de validation, appuies sur n'importe quel bouton pour continuer : ")
+            else:
+                cls()
+                print("Choix non valide. Veuillez sélectionner un numéro valide ou 0 pour revenir au menu principal.\n")
+        else:
+            cls()
+            print("Veuillez entrer un numéro valide.\n")
+
+
+def reward_menu_parent(user,data):
     data.show_list_reward()
-    if isinstance(user, Parent):
-        pass
-    else:
-        pass
+
+#Fait
+def reward_menu_enfant(user,data):
+    flag=True
+    while flag:
+        print("La Liste des Récompenses\n")
+        data.show_list_reward()
+        print("0) Pour revenir au menu")
+        userinput=input('Choissisez une récompense : ')
+        if userinput.isdigit():
+            userinput = int(userinput)
+            if userinput == 0:
+                flag=False
+                cls()
+            elif 0 < userinput <= len(data.list_reward):
+                cls()
+                print('o')
+                selected_reward = data.list_reward[userinput - 1]
+                print(selected_reward)
+                if selected_reward.cost <= user.point:
+                    user.request_reward(selected_reward,data)
+                    user.point=user.point-selected_reward.cost
+                    input("La récompense est en attente de validation, appuies sur n'importe quel bouton pour continuer : ")
+                    cls()
+                else:
+                    print("Vous n'avez pas assez de points.\n")
+            else:
+                cls()
+                print("Choix non valide. Veuillez sélectionner un numéro valide ou 0 pour revenir au menu principal.\n")
+        else:
+            cls()
+            print("Veuillez entrer un numéro valide.\n")
+
+
+    input()
+
+
+def reward_menu_parent(user,data):
+    pass
 
 def reward_to_be_granted_menu(user,data):
     data.show_list_reward_to_be_granted()
     
 
+#Fait
 def task_history_menu(user, data):
-    while True:
+    flag=True
+    while flag:
         data.show_list_task_history()
-        print("0) Retour au menu principal\n")
 
-        userinput = error_int_input("Sélectionnez une tâche pour afficher son historique (ou 0 pour revenir) : ", lambda: task_history_menu(user, data))
+        userinput = input("\n0) Retour au menu principal\n ")
 
-        if userinput == 0:
+        if userinput == '0':
             cls()
-            menu(user, data) 
-            return
+            flag=False
         else:
             cls()
             print("Choix non valide. Veuillez sélectionner un numéro valide ou 0 pour revenir au menu principal.\n")
 
-
-def task_to_validated_menu(user, data):
-    while True:
-        data.show_list_task_to_validated()
+#FAIT
+def task_to_be_validated_menu(user, data):
+    flag=True
+    while flag:
+        data.show_list_task_to_be_validated()
         print("(0) Retour au menu principal\n")
+        userinput = input("Sélectionnez une tâche à valider\n Pour passer en mode refuser mettez un -\n")
+        if userinput.isdigit():
+            userinput = int(userinput)
+            if userinput == 0:
+                cls()
+                flag=False
+            elif 0 < userinput <= len(data.list_task_to_be_validated):
+                task_history=data.list_task_to_be_validated[userinput-1]        
+                child=data.find_children(task_history.children)
+                user.accept_task(task_history,child,data)
+                cls()
+                print("La Tâche a bien été validée, Selectionnez une autre Tâche à valider\n") 
+        elif userinput == "-":
+            userinput=input("Sélectionnez une tâche à supprimer\n")
+            if userinput.isdigit():
+                userinput = int(userinput)
+                if userinput == 0:
+                    cls()
+                    flag=False
+                elif 0 < userinput <= len(data.list_task_to_be_validated):
+                    task_history=data.list_task_to_be_validated[userinput-1]        
+                    user.reject_task(task_history,data)
+                    cls()
+                    print("La Tâche a bien été supprimér, Appuyer sur une touche pour continuer\n") 
 
-        userinput = error_int_input("Sélectionnez une tâche à valider\n ", lambda: task_to_validated_menu(user, data))
-
-        if userinput == 0:
-            cls()
-            menu(user, data)  # Appel à la fonction menu pour revenir au menu principal
-            return
-        elif 0 < userinput <= len(data.list_task_to_validated):
-            cls()
-            # Traitez la tâche à valider sélectionnée ici
         else:
             cls()
             print("Choix non valide. Veuillez sélectionner un numéro valide ou 0 pour revenir au menu principal.\n")
+    menu(user, data)
+
+
 def scoreboard_menu(user,data):
     data.show_list_children()
 
-def children_menu(user,data):
-    count=0
-    for children in data.list_children:
-        count+=1
-        print(str(count)+') ' +str(children.name))
-        

@@ -5,7 +5,7 @@ class Task:
     current_id=0
 
     #l'id s'incrémente à chaque nouvel instance créer de telle manière que chaque instance a un id unique
-    def __init__(self, description,last_time,limite_time,point):
+    def __init__(self, description,last_time="2000-1-1",limite_time="2100-1-1",point=10):
         date_format = "%Y-%m-%d"
         self.__description =description
         self.__point = point
@@ -55,7 +55,7 @@ class Task:
         date_format = "%Y-%m-%d"
         time_now = datetime.now()
         time_now = time_now.strftime(date_format)
-        return TaskHistory(self.description,time_now,children.name)
+        return TaskHistory(self.description,time_now,children.name,self.point)
                
 
 

@@ -30,7 +30,7 @@ class DataManager():
         return self.__list_task_history
 
     @property
-    def list_task_to_validated(self):
+    def list_task_to_be_validated(self):
         return self.__list_task_to_be_validated
 
     @property
@@ -57,8 +57,8 @@ class DataManager():
     def list_task(self, new_value):
         self.__list_task = new_value
 
-    @list_task_to_validated.setter
-    def list_task_to_validated(self, new_value):
+    @list_task_to_be_validated.setter
+    def list_task_to_be_validated(self, new_value):
         self.__list_task_to_be_validated = new_value
 
     # méthode permettant l'ajout et la suppression
@@ -75,7 +75,7 @@ class DataManager():
         self.list_task_history.append(task_history)
 
     def add_task_to_be_validated(self, task_history):
-        self.list_task_to_validated.append(task_history)
+        self.list_task_to_be_validated.append(task_history)
 
     def add_children(self, children):
         self.list_children.append(children)
@@ -103,8 +103,8 @@ class DataManager():
 
     def del_task_to_be_validated(self, index):
         index=index-1
-        if 0 <= index < len(self.list_task_to_validated):
-            del self.list_task_to_validated[index]
+        if 0 <= index < len(self.list_task_to_be_validated):
+            del self.list_task_to_be_validated[index]
 
     def del_children(self, index):
         index=index-1
@@ -146,6 +146,15 @@ class DataManager():
         if 0 <= index < len(self.list_reward_to_be_granted):
             self.list_reward_to_be_granted[index] = new_reward_data
 
+
+    #find children object
+    #cas spécial a traiter..
+    def find_children(self,child_name):
+        for child in self.list_children:
+            if child.name ==child_name:
+                return child
+            
+
     ###### Commande de show
     def show_list_task(self):
         count=0
@@ -172,9 +181,9 @@ class DataManager():
             count += 1
             print(str(count) + ") " +str(task_history))
 
-    def show_list_task_to_validated(self):
+    def show_list_task_to_be_validated(self):
         count = 0
-        for task_history in self.list_task_to_validated:
+        for task_history in self.list_task_to_be_validated:
             count += 1
             print(str(count) + ") " +str(task_history))
 
@@ -191,20 +200,14 @@ class DataManager():
         self.list_reward = read_reward_file()
         self.list_reward_to_be_granted = read_reward_to_be_granted_file()
         self.list_task_history = read_task_history_file()
-        self.list_task_to_validated = read_task_to_be_validated()
+        self.list_task_to_be_validated = read_task_to_be_validated()
 
     def write_data(self):
         write_list_data(self.list_task,'fichier/task.json')
         write_list_data(self.list_children,'fichier/children.json')
         write_list_data(self.list_reward,'fichier/reward.json')
-        write_list_data(self.list_task_to_validated,'fichier/task_to_be_validated.json')
+        write_list_data(self.list_task_to_be_validated,'fichier/task_to_be_validated.json')
         write_list_data(self.list_task_history,'fichier/task_history.json')
-        write_list_task_to_be_validated(self.list_reward_to_be_granted,'fichier/reward_to_be_granted.json')
+        write_list_reward_to_be_granted(self.list_reward_to_be_granted,'fichier/reward_to_be_granted.json')
         write_list_data(self.list_task, 'fichier/task.json')
-        write_list_data(self.list_children, 'fichier/children.json')
-        write_list_data(self.list_reward, 'fichier/reward.json')
-        write_list_data(self.list_task_to_validated,
-                        'fichier/task_to_validated.json')
-        write_list_data(self.list_task_history, 'fichier/task_history.json')
-        write_list_task_to_be_validated(
-            self.list_reward_to_be_granted, 'fichier/reward_to_be_granted.json')
+  

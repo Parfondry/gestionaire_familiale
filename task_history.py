@@ -1,14 +1,19 @@
 from datetime import *
 class TaskHistory:
     current_id = 0
-    def __init__(self, description_task, date_done, children):
+    def __init__(self, description_task, date_done, children, point):
         TaskHistory.current_id += 1
         date_format = "%Y-%m-%d"
         self.__id = TaskHistory.current_id
         self.__description_task = description_task
         self.__date_done = datetime.strptime(date_done, date_format).date()
         self.__children = children
+        self.__point =point
 
+    @property
+    def point(self):
+        return self.__point
+    
     @property
     def id(self):
         return self.__id
@@ -25,6 +30,9 @@ class TaskHistory:
     def children(self):
         return self.__children
 
+    @point.setter
+    def point(self, new_point):
+        self.__point=new_point
     @id.setter
     def id(self,new_id):
         self.__id=new_id
@@ -43,7 +51,7 @@ class TaskHistory:
 
     #fonction qui permet de transformer un objet TASK en un dictionaire.
     def transform_to_dico(self):
-        dico={'id':self.id,'description_task':self.description_task,'date_done':self.date_done.strftime("%Y-%m-%d"),'children':self.children}     
+        dico={'id':self.id,'description_task':self.description_task,'date_done':self.date_done.strftime("%Y-%m-%d"),'children':self.children,"point":self.point}     
         return dico
     
     def __repr__(self):

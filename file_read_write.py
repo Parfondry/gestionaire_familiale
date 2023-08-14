@@ -44,13 +44,13 @@ def write_list_data(list,filename):
         list_data.append(item.transform_to_dico())
     write_file_data(filename, list_data)
 
-###### fonction pour écrire la task to be validated
-def write_list_task_to_be_validated(list,filename):
+###### fonction pour écrire la reward to be granted
+def write_list_reward_to_be_granted(list,filename):
     list_data=[]
     for item in list:
-        task_to_be_validated_dict=item[0].transform_to_dico()
-        task_to_be_validated_dict['user']=item[1]
-        list_data.append(task_to_be_validated_dict)
+        reward_to_be_granted_dict=item[0].transform_to_dico()
+        reward_to_be_granted_dict['user']=item[1]
+        list_data.append(reward_to_be_granted_dict)
     write_file_data(filename, list_data)
 
 
@@ -90,7 +90,8 @@ def read_task_history_file():
         description_task=task_history["description_task"]
         date_done=task_history["date_done"]
         children =task_history["children"]
-        liste_task_history.append(TaskHistory(description_task,date_done,children))
+        point=task_history["point"]
+        liste_task_history.append(TaskHistory(description_task,date_done,children,point))
     return liste_task_history
 
 
@@ -132,5 +133,6 @@ def read_task_to_be_validated():
         description_task=task_to_be_validated["description_task"]
         date_done=task_to_be_validated["date_done"]
         children =task_to_be_validated["children"]
-        liste_task_to_be_validated.append(TaskHistory(description_task,date_done,children))
+        point=task_to_be_validated['point']
+        liste_task_to_be_validated.append(TaskHistory(description_task,date_done,children,point))
     return liste_task_to_be_validated

@@ -25,6 +25,7 @@ class Parent(User):
         else:
             data.list_children.remove(child)
 
+
 # methodes for handeling tasks
 
     def add_task(self, task_name, points, last_time_done, time_limit, data):
@@ -38,10 +39,13 @@ class Parent(User):
         if task in data.list_task:
             data.list_task.remove(task)
 
-    def accept_task(self, task, child, data):
-        data.list_task_to_be_validated.remove(task)
-        data.add_task_history(task)
-        child.point += task.point
+    def accept_task(self, task_history, child, data):
+        data.list_task_to_be_validated.remove(task_history)
+        data.add_task_history(task_history)
+        child.point += task_history.point
+        for task in data.list_task:
+            if task.description==task_history.description_task:
+                task.last_time=task_history.date_done
 
     def reject_task(self, task,data):
         data.list_task_to_be_validated.remove(task)
@@ -54,7 +58,7 @@ class Parent(User):
             new_reward = Reward(reward.name, cost)
             data.add_reward(new_reward)
         else:
-            print("Il exixste déja une récompense : " + reward.name)
+            print("Il existe déja une récompense : " + reward.name)
 
     def remove_reward(self, reward, data):
         if reward in data.list_reward:
