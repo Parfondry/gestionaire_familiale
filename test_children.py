@@ -1,4 +1,3 @@
-from parent import Parent
 from children import Children
 from task import Task
 from reward import Reward
@@ -13,6 +12,7 @@ class TestChildren(unittest.TestCase):
 
         self.data.list_task_to_be_validated = [
             Task("Wash dishes", "2023-01-02", "2023-01-05", 5)]
+
         self.task = Task("Clean room", "2023-01-01", "2023-01-15", 10)
         self.reward = Reward("Ice cream", 5)
 

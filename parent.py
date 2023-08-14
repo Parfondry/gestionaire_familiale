@@ -47,11 +47,12 @@ class Parent(User):
             if task.description==task_history.description_task:
                 task.last_time=task_history.date_done
 
-    def reject_task(self, task,data):
+    def reject_task(self, task, data):
         data.list_task_to_be_validated.remove(task)
-    
+
 
 # methodes for handeling rewards
+
 
     def add_reward(self, reward, cost, data):
         if reward not in data.list_reward:
@@ -64,7 +65,7 @@ class Parent(User):
         if reward in data.list_reward:
             data.list_reward.remove(reward)
 
-    def accept_reward(self, reward, child,data):
+    def accept_reward(self, reward, child, data):
         data.list_reward_to_be_granted.remove(reward)
         child.points = child.points - reward.cost
         child.reward_list.add(reward)
