@@ -48,3 +48,4 @@ class TaskHistory:
     
     def __repr__(self):
         return(str(self.description_task) + " fait le " + str(self.date_done) + ". par " + str(self.children))
+    
