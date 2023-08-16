@@ -66,9 +66,18 @@ class DataManager():
     # prend un objet Task et l'ajoute a liste des taches
     # input : task => est un objet TASK !!
     def add_task(self, task):
+        """
+        Precondition: task is an instance of Task.
+        Postcondition: task is added to the list of tasks.
+
+        """
         self.list_task.append(task)
 
     def add_reward(self, reward):
+        """
+        Precondition: reward is an instance of Reward.
+        Postcondition: reward is added to the list of rewards.
+        """
         self.list_reward.append(reward)
 
     def add_task_history(self, task_history):
@@ -150,6 +159,11 @@ class DataManager():
     #find children object
     #cas spécial a traiter..
     def find_children(self,child_name):
+        """
+        Precondition: child_name is a string.
+        Postcondition: Returns the child object with the specified name if found, otherwise returns None.
+
+        """
         for child in self.list_children:
             if child.name ==child_name:
                 return child
@@ -157,6 +171,12 @@ class DataManager():
 
     ###### Commande de show
     def show_list_task(self):
+
+        """
+        Precondition: None
+        Postcondition: Displays the list of tasks along with their index numbers.
+    
+        """
         count=0
         for task in self.list_task:
             count+=1
@@ -195,19 +215,33 @@ class DataManager():
     #####
 
     def load_data(self):
-        self.list_task = read_task_file()
-        self.list_children = read_children_file()
-        self.list_reward = read_reward_file()
-        self.list_reward_to_be_granted = read_reward_to_be_granted_file()
-        self.list_task_history = read_task_history_file()
-        self.list_task_to_be_validated = read_task_to_be_validated()
+        """
+        Precondition: None
+        Postcondition: Loads data from external files and populates the lists.
+        """
+        try:
+            self.list_task = read_task_file()
+            self.list_children = read_children_file()
+            self.list_reward = read_reward_file()
+            self.list_reward_to_be_granted = read_reward_to_be_granted_file()
+            self.list_task_history = read_task_history_file()
+            self.list_task_to_be_validated = read_task_to_be_validated()
+        except Exception as e:
+            raise RuntimeError("Failed to load data: " + str(e))
 
     def write_data(self):
-        write_list_data(self.list_task,'fichier/task.json')
-        write_list_data(self.list_children,'fichier/children.json')
-        write_list_data(self.list_reward,'fichier/reward.json')
-        write_list_data(self.list_task_to_be_validated,'fichier/task_to_be_validated.json')
-        write_list_data(self.list_task_history,'fichier/task_history.json')
-        write_list_reward_to_be_granted(self.list_reward_to_be_granted,'fichier/reward_to_be_granted.json')
-        write_list_data(self.list_task, 'fichier/task.json')
+        """
+        Precondition: None
+        Postcondition: Writes data from the lists to external files.
+        """
+        try:
+            write_list_data(self.list_task,'fichier/task.json')
+            write_list_data(self.list_children,'fichier/children.json')
+            write_list_data(self.list_reward,'fichier/reward.json')
+            write_list_data(self.list_task_to_be_validated,'fichier/task_to_be_validated.json')
+            write_list_data(self.list_task_history,'fichier/task_history.json')
+            write_list_reward_to_be_granted(self.list_reward_to_be_granted,'fichier/reward_to_be_granted.json')
+            write_list_data(self.list_task, 'fichier/task.json')
+        except Exception as e:
+            raise RuntimeError("Failed to write data: " + str(e))
   

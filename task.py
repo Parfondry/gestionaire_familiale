@@ -1,6 +1,7 @@
 from datetime import datetime
 from task_history import TaskHistory
 
+class Task:
 
 class Task:
     # l'id s'incrémente à chaque nouvel instance créer de telle manière que chaque instance a un id unique
@@ -50,8 +51,9 @@ class Task:
         date_format = "%Y-%m-%d"
         time_now = datetime.now()
         time_now = time_now.strftime(date_format)
-        return TaskHistory(self.description, time_now, children.name, self.point)
-
+        return TaskHistory(self.description, time_now, children.description, self.point)
+               
+               
     # fonction qui permet de transformer un objet TASK en un dictionaire.
 
     def transform_to_dico(self):
