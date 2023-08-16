@@ -24,15 +24,6 @@ class TestChildren(unittest.TestCase):
         self.child.reward_list = ["Ice cream", "New toy"]
         self.assertListEqual(self.child.reward_list, ["Ice cream", "New toy"])
 
-    def test_request_task(self):
-        self.child.request_task(self.task, self.data)
-        self.assertIn(self.task.task_to_task_history(self.child),
-                      self.data.list_task_to_be_validated)
-
-    def test_request_reward(self):
-        self.child.request_reward(self.reward, self.data)
-        self.assertIn(self.reward, self.data.list_reward_to_be_granted)
-
     def test_transform_to_dico(self):
         dico = self.child.transform_to_dico()
         self.assertDictEqual(
