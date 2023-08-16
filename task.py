@@ -2,8 +2,9 @@ from datetime import datetime
 from task_history import TaskHistory
 
 
-    #l'id s'incrémente à chaque nouvel instance créer de telle manière que chaque instance a un id unique
-    def __init__(self, description,last_time="2000-1-1",limite_time="2100-1-1",point=10):
+class Task:
+    # l'id s'incrémente à chaque nouvel instance créer de telle manière que chaque instance a un id unique
+    def __init__(self, description, last_time="2000-1-1", limite_time="2100-1-1", point=10):
         date_format = "%Y-%m-%d"
         self.__description = description
         self.__point = point
@@ -49,8 +50,7 @@ from task_history import TaskHistory
         date_format = "%Y-%m-%d"
         time_now = datetime.now()
         time_now = time_now.strftime(date_format)
-        return TaskHistory(self.description,time_now,children.name,self.point)
-               
+        return TaskHistory(self.description, time_now, children.name, self.point)
 
     # fonction qui permet de transformer un objet TASK en un dictionaire.
 
@@ -60,4 +60,4 @@ from task_history import TaskHistory
         return dico
 
     def __repr__(self):
-        return(str(self.description) + " a faire avant le " + str(self.limite_time) + ". Rapporte " + str(self.point) +" points.")
+        return (str(self.description) + " a faire avant le " + str(self.limite_time) + ". Rapporte " + str(self.point) + " points.")
